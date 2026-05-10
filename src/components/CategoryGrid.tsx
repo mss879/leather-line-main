@@ -1,91 +1,69 @@
-import { Button } from "@/components/ui/button";
-import { ArrowUpRight } from "lucide-react";
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const CategoryGrid = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [-50, 150]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [150, -50]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
   const categories = [
-    {
-      title: "Sneakers",
-      image: "/sneaker_1.png",
-      href: "/shop/category/sneakers"
-    },
-    {
-      title: "Boots",
-      image: "/boot_1.png",
-      href: "/shop/category/boots"
-    },
-    {
-      title: "Oxfords",
-      image: "/oxford_1.png",
-      href: "/shop/category/oxfords"
-    },
-    {
-      title: "Loafers",
-      image: "/loafer_1.png",
-      href: "/shop/category/loafers"
-    }
+    { title: "Running", image: "/category_running.png", href: "/shop/running", y: y1, width: "md:w-3/4", align: "items-start" },
+    { title: "Basketball", image: "/category_basketball.png", href: "/shop/basketball", y: y2, width: "md:w-1/2", align: "items-end mt-32" },
+    { title: "Retro", image: "/category_retro.png", href: "/shop/retro", y: y3, width: "md:w-2/3", align: "items-start mt-16" },
+    { title: "Lifestyle", image: "/category_lifestyle.png", href: "/shop/lifestyle", y: y4, width: "md:w-full", align: "items-center mt-24" }
   ];
 
-  const marqueeText = "LEATHER LINE · PREMIUM FOOTWEAR · LEATHER LINE · PREMIUM FOOTWEAR · ";
-
   return (
-    <section className="w-full border-t-2 border-b-2 border-gray-200">
-      <div className="relative">
-        {/* Single continuous scrolling text layer across all cards */}
-        <div className="absolute inset-0 flex items-center z-10 pointer-events-none opacity-60 overflow-hidden">
-          <div className="animate-scroll-left inline-flex whitespace-nowrap">
-            {Array.from({ length: 2 }).map((_, groupIndex) => (
-              <div key={groupIndex} className="flex shrink-0">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <h2 
-                    key={i} 
-                    className="text-white drop-shadow-lg text-4xl md:text-5xl lg:text-7xl font-bold tracking-wider shrink-0 px-6"
-                    aria-hidden="true"
-                  >
-                    {marqueeText}
-                  </h2>
-                ))}
-              </div>
-            ))}
-          </div>
+    <section ref={containerRef} className="w-full px-4 md:px-12 py-32 bg-[#FAFAFA] overflow-hidden">
+      <div className="max-w-[1600px] mx-auto">
+        
+        <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-black/10 pb-8">
+          <h2 className="text-[10vw] md:text-[6vw] font-black uppercase tracking-tighter leading-none text-black">
+            The<br/>Archives
+          </h2>
+          <a data-cursor data-cursor-text="ALL" href="/shop" className="text-sm font-bold uppercase tracking-widest text-black hover:text-black/50 transition-colors">
+            View All Collections
+          </a>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+        
+        <div className="flex flex-col gap-24 md:gap-0">
           {categories.map((category, index) => (
-            <div key={index} className="relative group border-r-2 border-gray-200 last:border-r-0 md:last:border-r lg:last:border-r-0">
-              <a
+            <div key={index} className={`flex flex-col ${category.align} w-full`}>
+              <motion.a
                 href={category.href}
-                className="block relative h-[50vh] md:h-[60vh] lg:h-[70vh] bg-white overflow-hidden hover:opacity-90 transition-opacity"
+                style={{ y: category.y }}
+                data-cursor
+                data-cursor-text="EXPLORE"
+                className={`group relative block ${category.width} aspect-[4/3] rounded-3xl overflow-hidden`}
               >
-                {/* Background Image */}
-                <div className="absolute inset-0">
+                <motion.div 
+                  className="absolute inset-0 bg-black/5"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                >
                   <img
                     src={category.image}
                     alt={category.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
+                    className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
                   />
+                </motion.div>
+                
+                {/* Massive Typography Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center mix-blend-difference pointer-events-none">
+                  <h3 className="text-white text-[12vw] md:text-[8vw] font-black uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform scale-90 group-hover:scale-100">
+                    {category.title}
+                  </h3>
                 </div>
-
-                {/* Category Label and Button */}
-                <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <div className="mb-4">
-                    <p className="text-black text-lg font-bold drop-shadow-md">
-                      {category.title}
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 group-hover:gap-3 transition-all">
-                    <span className="text-black text-sm font-bold drop-shadow-md">
-                      Shop Now
-                    </span>
-                    <div className="relative">
-                      <ArrowUpRight 
-                        className="w-4 h-4 text-black transform rotate-0 group-hover:rotate-45 transition-transform font-bold" 
-                      />
-                    </div>
-                  </div>
-                </div>
-              </a>
+              </motion.a>
             </div>
           ))}
         </div>

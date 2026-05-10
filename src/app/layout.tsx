@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/index.css";
 import Providers from "./providers";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Leather Line - Premium High-End Footwear | Luxury Shoes",
@@ -61,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth selection:bg-white selection:text-black">
       <head>
         <script
           type="application/ld+json"
@@ -100,7 +101,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-background text-foreground">
+      <body className="bg-[#111] text-white font-sans antialiased">
+        <CustomCursor />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -46,3 +46,9 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Virtual environment
+.venv/
+
+# Design files
+design/
