@@ -6,10 +6,10 @@ import { ShoppingBag } from "lucide-react";
 
 const NewArrivals = () => {
   const products = [
-    { id: 1, name: "Premium Leather Boots", category: "Boots", price: "$125", image: "/boot_1.png", mt: "mt-0" },
-    { id: 2, name: "Classic High-Top", category: "Sneakers", price: "$85", image: "/sneaker_1.png", mt: "mt-32" },
-    { id: 3, name: "Comfort Runner", category: "Athletic", price: "$145", image: "/running_1.png", mt: "mt-16" },
-    { id: 4, name: "Formal Oxford", category: "Formal", price: "$135", image: "/oxford_1.png", mt: "mt-48" }
+    { id: 1, name: "Premium Leather Boots", category: "Boots", price: "$125", image: "/boot_1.webp", mt: "mt-0" },
+    { id: 2, name: "Classic High-Top", category: "Sneakers", price: "$85", image: "/sneaker_1.webp", mt: "mt-32" },
+    { id: 3, name: "Comfort Runner", category: "Athletic", price: "$145", image: "/running_1.webp", mt: "mt-16" },
+    { id: 4, name: "Formal Oxford", category: "Formal", price: "$135", image: "/oxford_1.webp", mt: "mt-48" }
   ];
 
   return (

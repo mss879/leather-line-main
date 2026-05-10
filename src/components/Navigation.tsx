@@ -56,7 +56,7 @@ const Navigation = () => {
           <div className="flex items-center h-20">
             {/* Logo */}
             <div className="flex-shrink-0 border-r border-white/20 h-20 flex items-center px-8 py-1">
-              <img src="/leather-line.jpg" alt="Leather Line" className="h-14 w-auto object-contain" />
+              <img src="/leather-line.webp" alt="Leather Line" className="h-14 w-auto object-contain" />
             </div>
 
             {/* Center Promotional Text Cycle */}
@@ -231,7 +231,7 @@ const Navigation = () => {
                     data-cursor-text="SHOP"
                   >
                     <img 
-                      src="/hero_sneakers.png" 
+                      src="/hero_sneakers.webp" 
                       alt="Just Dropped" 
                       className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
                     />
@@ -248,7 +248,7 @@ const Navigation = () => {
                     data-cursor-text="EXPLORE"
                   >
                     <img 
-                      src="/hero_oxfords.png" 
+                      src="/hero_oxfords.webp" 
                       alt="Featured Shoes" 
                       className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
                     />

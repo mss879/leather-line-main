@@ -74,8 +74,8 @@ export default function RootLayout({
               description:
                 "Premium footwear brand offering an elegant collection of leather shoes, sneakers, boots, and oxfords crafted with the finest materials.",
               url: "/",
-              logo: "/leather-line.jpg",
-              image: "/leather-line.jpg",
+              logo: "/leather-line.webp",
+              image: "/leather-line.webp",
               priceRange: "$$$",
               sameAs: [],
               offers: {

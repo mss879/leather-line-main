@@ -116,19 +116,19 @@ const CinematicScroll = () => {
           {/* Floating Shoes */}
           {/* S1 (Top Left) */}
           <motion.div className="absolute w-64 md:w-96 drop-shadow-2xl left-[10%]" style={{ y: shoe1Y, rotate: shoe1Rotate }}>
-            <img src="/hero_color_1.png" alt="Oxfords" className="w-full h-auto object-contain" />
+            <img src="/hero_color_1.webp" alt="Oxfords" className="w-full h-auto object-contain" />
           </motion.div>
           {/* S2 (Top Right) */}
           <motion.div className="absolute w-64 md:w-96 drop-shadow-2xl right-[2%]" style={{ y: shoe2Y, rotate: shoe2Rotate }}>
-            <img src="/hero_color_2.png" alt="Sneakers" className="w-full h-auto object-contain" />
+            <img src="/hero_color_2.webp" alt="Sneakers" className="w-full h-auto object-contain" />
           </motion.div>
           {/* S3 (Bottom Left) */}
           <motion.div className="absolute w-64 md:w-96 drop-shadow-2xl left-[5%]" style={{ y: shoe3Y, rotate: shoe3Rotate }}>
-            <img src="/hero_color_3.png" alt="Boots" className="w-full h-auto object-contain" />
+            <img src="/hero_color_3.webp" alt="Boots" className="w-full h-auto object-contain" />
           </motion.div>
           {/* S4 (Bottom Right) */}
           <motion.div className="absolute w-64 md:w-96 drop-shadow-2xl right-[10%]" style={{ y: shoe4Y, rotate: shoe4Rotate }}>
-            <img src="/hero_color_4.png" alt="Loafers" className="w-full h-auto object-contain" />
+            <img src="/hero_color_4.webp" alt="Loafers" className="w-full h-auto object-contain" />
           </motion.div>
         </motion.div>
 
@@ -158,7 +158,7 @@ const CinematicScroll = () => {
             className="hidden md:block w-5/12 h-[70vh] relative shadow-2xl overflow-hidden rounded-3xl"
             style={{ y: img1Y, clipPath: img1Clip }}
           >
-            <motion.img src="/hero_generated_1.jpg" className="w-full h-full object-cover" style={{ scale: img1Scale }} alt="Heritage" />
+            <motion.img src="/hero_generated_1.webp" className="w-full h-full object-cover" style={{ scale: img1Scale }} alt="Heritage" />
           </motion.div>
         </motion.div>
 
@@ -171,7 +171,7 @@ const CinematicScroll = () => {
             className="hidden md:block w-5/12 h-[60vh] relative shadow-2xl overflow-hidden mt-20"
             style={{ y: img2Y, clipPath: img2Clip }}
           >
-            <motion.img src="/hero_generated_2.jpg" className="w-full h-full object-cover" style={{ scale: img2Scale }} alt="Craft" />
+            <motion.img src="/hero_generated_2.webp" className="w-full h-full object-cover" style={{ scale: img2Scale }} alt="Craft" />
           </motion.div>
           <motion.div className="w-full md:w-1/2 flex flex-col items-end text-right" style={{ y: text2Y }}>
             <span className="text-sm tracking-[0.3em] text-black/50 mb-6 font-bold uppercase">02 / Craft</span>
@@ -189,7 +189,7 @@ const CinematicScroll = () => {
 
         {/* Slide 3: Future */}
         <motion.div className="absolute inset-0 flex items-center justify-center z-0" style={{ opacity: slide3Opacity }}>
-          <motion.img src="/hero_generated_3.jpg" className="w-full h-full object-cover" style={{ scale: img3Scale }} alt="Future" />
+          <motion.img src="/hero_generated_3.webp" className="w-full h-full object-cover" style={{ scale: img3Scale }} alt="Future" />
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
         </motion.div>
         

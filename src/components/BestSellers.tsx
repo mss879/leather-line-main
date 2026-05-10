@@ -10,8 +10,8 @@ const BestSellers = () => {
       name: "Limited Edition Sneakers",
       category: "Sneakers",
       price: "$240",
-      frontImage: "/sneaker_2.png",
-      backImage: "/sneaker_2.png",
+      frontImage: "/sneaker_2.webp",
+      backImage: "/sneaker_2.webp",
       href: "/shoes/limited-edition-sneakers"
     },
     {
@@ -19,8 +19,8 @@ const BestSellers = () => {
       name: "Premium Leather Loafers",
       category: "Formal",
       price: "$120",
-      frontImage: "/loafer_1.png",
-      backImage: "/loafer_1.png",
+      frontImage: "/loafer_1.webp",
+      backImage: "/loafer_1.webp",
       href: "/shoes/premium-leather-loafers"
     },
     {
@@ -28,8 +28,8 @@ const BestSellers = () => {
       name: "Trail Running Shoes",
       category: "Athletic",
       price: "$155",
-      frontImage: "/running_2.png",
-      backImage: "/running_2.png",
+      frontImage: "/running_2.webp",
+      backImage: "/running_2.webp",
       href: "/shoes/trail-running-shoes"
     },
     {
@@ -37,8 +37,8 @@ const BestSellers = () => {
       name: "Casual Slip-On Shoes",
       category: "Casual",
       price: "$75",
-      frontImage: "/slip_on_1.png",
-      backImage: "/slip_on_1.png",
+      frontImage: "/slip_on_1.webp",
+      backImage: "/slip_on_1.webp",
       href: "/shoes/casual-slip-on-shoes"
     }
   ];
