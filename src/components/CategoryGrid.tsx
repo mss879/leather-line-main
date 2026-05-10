@@ -3,128 +3,170 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+const categories = [
+  { 
+    title: "Running", 
+    subtitle: "Engineered for Speed", 
+    image: "/category_running.webp", 
+    href: "/shop/running",
+    count: "48 Styles"
+  },
+  { 
+    title: "Basketball", 
+    subtitle: "Court Ready", 
+    image: "/category_basketball.webp", 
+    href: "/shop/basketball",
+    count: "36 Styles"
+  },
+  { 
+    title: "Retro", 
+    subtitle: "Classic Silhouettes", 
+    image: "/category_retro.webp", 
+    href: "/shop/retro",
+    count: "52 Styles"
+  },
+  { 
+    title: "Lifestyle", 
+    subtitle: "Everyday Comfort", 
+    image: "/category_lifestyle.webp", 
+    href: "/shop/lifestyle",
+    count: "64 Styles"
+  }
+];
+
 const CategoryGrid = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  // Subtle interior parallax instead of extreme overlapping translations
-  const yImage1 = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  const yImage2 = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
-  const yImage3 = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const yImage4 = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
-
-  const categories = [
-    { 
-      title: "Running", 
-      subtitle: "Engineered for speed", 
-      image: "/category_running.webp", 
-      href: "/shop/running", 
-      y: yImage1, 
-      className: "md:col-span-8 md:row-span-2 h-[60vh] md:h-auto min-h-[500px]" 
-    },
-    { 
-      title: "Basketball", 
-      subtitle: "Court ready", 
-      image: "/category_basketball.webp", 
-      href: "/shop/basketball", 
-      y: yImage2, 
-      className: "md:col-span-4 h-[40vh] md:h-[400px]" 
-    },
-    { 
-      title: "Retro", 
-      subtitle: "Classic silhouettes", 
-      image: "/category_retro.webp", 
-      href: "/shop/retro", 
-      y: yImage3, 
-      className: "md:col-span-4 h-[40vh] md:h-[400px]" 
-    },
-    { 
-      title: "Lifestyle", 
-      subtitle: "Everyday comfort", 
-      image: "/category_lifestyle.webp", 
-      href: "/shop/lifestyle", 
-      y: yImage4, 
-      className: "md:col-span-12 h-[50vh] md:h-[500px]" 
-    }
-  ];
+  const headerY = useTransform(scrollYProgress, [0, 0.3], [60, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   return (
-    <section ref={containerRef} className="w-full px-4 md:px-8 py-24 bg-white overflow-hidden">
-      <div className="max-w-[1600px] mx-auto">
+    <section ref={sectionRef} className="w-full min-h-screen bg-[#0A0A0A] relative overflow-hidden py-0">
+      
+      {/* Ambient background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="w-full h-full flex flex-col">
         
-        {/* Refined Header */}
-        <div className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-black/10 pb-8">
+        {/* Section Header */}
+        <motion.div 
+          className="px-6 md:px-12 lg:px-16 pt-20 pb-10 md:pt-28 md:pb-14 flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+          style={{ y: headerY, opacity: headerOpacity }}
+        >
           <div>
-            <span className="text-black/50 font-medium uppercase tracking-widest text-sm mb-4 block">
-              Curated Selection
+            <span className="text-white/30 font-medium uppercase tracking-[0.35em] text-[10px] md:text-xs mb-4 block">
+              Shop by Category
             </span>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-black">
-              The Archives
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[0.95]">
+              Find Your<br/>
+              <span className="text-white/30">Style</span>
             </h2>
           </div>
           <a 
-            data-cursor 
-            data-cursor-text="ALL" 
             href="/shop" 
-            className="group inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-black hover:text-black/60 transition-colors pb-2"
+            className="group inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.25em] text-white/50 hover:text-white transition-colors duration-500 pb-1 border-b border-white/10 hover:border-white/40"
           >
-            View All Collections
-            <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            View All
+            <svg className="w-3.5 h-3.5 transform group-hover:translate-x-1.5 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
-        </div>
-        
-        {/* Architectural Asymmetrical Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
-          {categories.map((category, index) => (
-            <motion.a
-              key={index}
-              href={category.href}
-              data-cursor
-              data-cursor-text="EXPLORE"
-              className={`group relative block rounded-2xl overflow-hidden bg-[#F5F5F5] ${category.className}`}
-            >
-              {/* Inner Image Parallax wrapper */}
-              <motion.div 
-                style={{ y: category.y }}
-                className="absolute inset-[-10%] w-[120%] h-[120%]"
-              >
-                <img
-                  src={category.image}
-                  alt={category.title}
-                  className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-                />
-              </motion.div>
-              
-              {/* Elegant Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-              
-              {/* Typography & Interaction Whimsy */}
-              <div className="absolute bottom-0 left-0 w-full p-8 md:p-10 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-[0.6s] ease-[0.16,1,0.3,1]">
-                <span className="text-white/80 font-medium tracking-widest uppercase text-xs md:text-sm mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  {category.subtitle}
-                </span>
-                <h3 className="text-white text-3xl md:text-5xl font-bold tracking-tight">
-                  {category.title}
-                </h3>
-              </div>
+        </motion.div>
 
-              {/* Delightful Hover Arrow Indicator */}
-              <div className="absolute top-8 right-8 w-12 h-12 bg-white text-black rounded-full flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-[0.6s] ease-[0.16,1,0.3,1] shadow-lg">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14"/>
-                  <path d="m12 5 7 7-7 7"/>
-                </svg>
-              </div>
-            </motion.a>
+        {/* Full-Width Category Grid — fits the screen */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/[0.04] px-0">
+          {categories.map((category, index) => (
+            <CategoryCard key={index} category={category} index={index} scrollProgress={scrollYProgress} />
           ))}
         </div>
       </div>
     </section>
+  );
+};
+
+interface CategoryCardProps {
+  category: {
+    title: string;
+    subtitle: string;
+    image: string;
+    href: string;
+    count: string;
+  };
+  index: number;
+  scrollProgress: any;
+}
+
+const CategoryCard = ({ category, index, scrollProgress }: CategoryCardProps) => {
+  const cardY = useTransform(scrollProgress, [0, 0.3], [80 + index * 20, 0]);
+  const cardOpacity = useTransform(scrollProgress, [0.05 + index * 0.03, 0.2 + index * 0.03], [0, 1]);
+  const imgScale = useTransform(scrollProgress, [0, 1], [1.15, 1]);
+
+  return (
+    <motion.a
+      href={category.href}
+      className="group relative block bg-[#0A0A0A] overflow-hidden"
+      style={{
+        y: cardY,
+        opacity: cardOpacity,
+        minHeight: "clamp(400px, 60vh, 700px)"
+      }}
+    >
+      {/* Image */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ scale: imgScale }}
+      >
+        <img
+          src={category.image}
+          alt={category.title}
+          className="w-full h-full object-cover group-hover:scale-110"
+          style={{ transition: "transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)" }}
+        />
+      </motion.div>
+      
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 group-hover:via-black/30 transition-all duration-700" />
+      
+      {/* Border line on hover */}
+      <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-700 z-10" />
+      
+      {/* Content overlay */}
+      <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-10 z-10">
+        
+        {/* Top-right corner count */}
+        <div className="self-end">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 group-hover:text-white/60 transition-colors duration-500">
+            {category.count}
+          </span>
+        </div>
+        
+        {/* Bottom content */}
+        <div className="flex items-end justify-between">
+          <div className="translate-y-2 group-hover:translate-y-0" style={{ transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <span className="block text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-white/40 mb-3 opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-y-2 group-hover:translate-y-0 delay-75">
+              {category.subtitle}
+            </span>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none uppercase">
+              {category.title}
+            </h3>
+          </div>
+          
+          {/* Explore arrow */}
+          <div className="w-12 h-12 rounded-full bg-white/0 group-hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 flex-shrink-0 ml-4" style={{ transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <svg 
+              className="w-5 h-5 text-white group-hover:text-black transition-colors duration-300" 
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </motion.a>
   );
 };
 

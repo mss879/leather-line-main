@@ -1,80 +1,177 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const reviews = [
   {
     id: 1,
     name: "James L.",
     role: "Verified Buyer",
-    content: "The craftsmanship is unparalleled. These are without a doubt the most comfortable oxfords I have ever worn.",
+    rating: 5,
+    product: "Heritage Oxford",
+    content: "The craftsmanship is unparalleled. These are without a doubt the most comfortable oxfords I have ever worn. The leather quality is extraordinary.",
+    date: "2 weeks ago"
   },
   {
     id: 2,
     name: "Michael C.",
     role: "Verified Buyer",
-    content: "I was hesitant about the price, but the quality of the leather and the attention to detail blew me away. Worth every penny.",
+    rating: 5,
+    product: "Limited Edition Sneakers",
+    content: "I was hesitant about the price, but the quality of the leather and the attention to detail blew me away. Worth every penny. Already ordered my second pair.",
+    date: "1 month ago"
   },
   {
     id: 3,
     name: "David R.",
     role: "Verified Buyer",
-    content: "The trail runners are incredibly durable and stylish. They handled my weekend hike perfectly and look great in the city.",
+    rating: 5,
+    product: "Trail Running Shoes",
+    content: "The trail runners are incredibly durable and stylish. They handled my weekend hike perfectly and look great in the city too. Perfect dual-purpose shoe.",
+    date: "3 weeks ago"
+  },
+  {
+    id: 4,
+    name: "Sarah K.",
+    role: "Verified Buyer",
+    rating: 5,
+    product: "Casual Slip-On",
+    content: "Finally found a brand that doesn't compromise between comfort and aesthetics. The slip-ons feel like wearing clouds. My go-to everyday shoe now.",
+    date: "1 week ago"
+  },
+  {
+    id: 5,
+    name: "Alex M.",
+    role: "Verified Buyer",
+    rating: 4,
+    product: "Aero Runner Pro",
+    content: "Exceptional running shoes. The cushioning is perfect for long distance, and the breathability keeps my feet cool. Great for daily runners.",
+    date: "5 days ago"
   }
 ];
 
 const Testimonials = () => {
-  return (
-    <section className="bg-[#FAFAFA] py-32">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
-        <div className="flex flex-col items-center text-center mb-24">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-xs font-bold uppercase tracking-[0.3em] text-black/50 mb-4"
-          >
-            Word on the Street
-          </motion.p>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black max-w-2xl"
-          >
-            "A masterclass in modern shoemaking."
-          </motion.h2>
-        </div>
+  const [activeIndex, setActiveIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
-          {reviews.map((review, index) => (
-            <motion.div 
-              key={review.id} 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center text-center group"
+  const startAutoPlay = () => {
+    intervalRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % reviews.length);
+    }, 5000);
+  };
+
+  const stopAutoPlay = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+
+  useEffect(() => {
+    startAutoPlay();
+    return () => stopAutoPlay();
+  }, []);
+
+  const goTo = (index: number) => {
+    stopAutoPlay();
+    setActiveIndex(index);
+    startAutoPlay();
+  };
+
+  const prev = () => goTo((activeIndex - 1 + reviews.length) % reviews.length);
+  const next = () => goTo((activeIndex + 1) % reviews.length);
+
+  return (
+    <section className="bg-white py-24 md:py-32 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <span className="text-black/25 font-bold uppercase tracking-[0.35em] text-[10px] md:text-xs mb-4 block">
+            Word on the Street
+          </span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter text-black leading-[0.95] mb-4">
+            What People<br/>
+            <span className="text-black/20">Are Saying</span>
+          </h2>
+          <div className="flex items-center justify-center gap-2 mt-6">
+            <div className="flex items-center gap-0.5">
+              {[1,2,3,4,5].map((s) => (
+                <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-black/60 ml-1">4.8/5</span>
+            <span className="text-xs text-black/30 ml-1">from 1,200+ reviews</span>
+          </div>
+        </motion.div>
+
+        {/* Testimonial Carousel */}
+        <div className="relative max-w-3xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="text-center"
             >
-              <div className="mb-8">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-black/10 group-hover:text-black/30 transition-colors duration-500">
-                  <path d="M10 11L8 17H5L7 11H5V7H10V11ZM19 11L17 17H14L16 11H14V7H19V11Z" fill="currentColor"/>
-                </svg>
+              {/* Stars */}
+              <div className="flex items-center justify-center gap-1 mb-8">
+                {Array.from({ length: reviews[activeIndex].rating }).map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                ))}
               </div>
-              <p className="text-lg text-black/80 font-medium leading-relaxed mb-8">
-                {review.content}
-              </p>
-              <div className="mt-auto">
+              
+              {/* Quote */}
+              <blockquote className="text-xl md:text-2xl lg:text-3xl font-medium text-black leading-relaxed mb-10">
+                &ldquo;{reviews[activeIndex].content}&rdquo;
+              </blockquote>
+              
+              {/* Author */}
+              <div>
                 <p className="font-bold text-black uppercase tracking-widest text-sm mb-1">
-                  {review.name}
+                  {reviews[activeIndex].name}
                 </p>
-                <p className="text-xs text-black/40 font-bold uppercase tracking-widest">
-                  {review.role}
+                <p className="text-[10px] text-black/30 font-bold uppercase tracking-widest">
+                  {reviews[activeIndex].role} · {reviews[activeIndex].product} · {reviews[activeIndex].date}
                 </p>
               </div>
             </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          <button 
+            onClick={prev}
+            className="absolute left-0 md:-left-16 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-black/10 hover:border-black/30 hover:bg-black hover:text-white flex items-center justify-center text-black/40 transition-all duration-300"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button 
+            onClick={next}
+            className="absolute right-0 md:-right-16 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-black/10 hover:border-black/30 hover:bg-black hover:text-white flex items-center justify-center text-black/40 transition-all duration-300"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex items-center justify-center gap-2 mt-12">
+          {reviews.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goTo(index)}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                index === activeIndex 
+                  ? "w-8 bg-black" 
+                  : "w-1.5 bg-black/15 hover:bg-black/30"
+              }`}
+            />
           ))}
         </div>
       </div>

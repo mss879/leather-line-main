@@ -233,7 +233,8 @@ const Navigation = () => {
                     <img 
                       src="/hero_sneakers.webp" 
                       alt="Just Dropped" 
-                      className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
+                      className="w-full h-full object-cover group-hover:scale-105"
+                      style={{ transition: "transform 700ms cubic-bezier(0.16, 1, 0.3, 1)" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-end transition-colors duration-500 group-hover:from-black">
                       <h4 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">The Drop</h4>
@@ -250,7 +251,8 @@ const Navigation = () => {
                     <img 
                       src="/hero_oxfords.webp" 
                       alt="Featured Shoes" 
-                      className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
+                      className="w-full h-full object-cover group-hover:scale-105"
+                      style={{ transition: "transform 700ms cubic-bezier(0.16, 1, 0.3, 1)" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-end transition-colors duration-500 group-hover:from-black">
                       <h4 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">Classics</h4>
