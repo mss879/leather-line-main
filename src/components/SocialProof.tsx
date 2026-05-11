@@ -4,19 +4,20 @@ import { motion } from "framer-motion";
 
 const SocialProof = () => {
   const brands = [
-    { name: "VOGUE", className: "text-3xl md:text-4xl font-serif tracking-widest font-bold" },
-    { name: "GQ", className: "text-4xl md:text-5xl font-serif tracking-tighter font-bold" },
-    { name: "ESQUIRE", className: "text-3xl md:text-4xl font-sans tracking-tight font-black uppercase" },
-    { name: "FORBES", className: "text-3xl md:text-4xl font-serif font-bold uppercase tracking-widest" },
-    { name: "HYPEBEAST", className: "text-2xl md:text-3xl font-sans font-black tracking-widest uppercase" },
-    { name: "COMPLEX", className: "text-3xl md:text-4xl font-sans font-black uppercase tracking-tight" }
+    { name: "NIKE", className: "text-4xl md:text-5xl font-sans font-black italic tracking-tighter" },
+    { name: "ADIDAS", className: "text-3xl md:text-4xl font-sans font-bold tracking-widest uppercase" },
+    { name: "NEW BALANCE", className: "text-3xl md:text-4xl font-serif tracking-tight font-bold italic" },
+    { name: "PUMA", className: "text-4xl md:text-5xl font-sans font-black uppercase tracking-tighter" },
+    { name: "CONVERSE", className: "text-3xl md:text-4xl font-sans font-medium tracking-[0.2em] uppercase" },
+    { name: "VANS", className: "text-4xl md:text-5xl font-sans font-black uppercase tracking-tighter" },
+    { name: "DR. MARTENS", className: "text-3xl md:text-4xl font-serif font-bold uppercase tracking-widest" }
   ];
 
   return (
     <section className="bg-white py-16 md:py-20 overflow-hidden border-b border-black/5">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-8">
         <p className="text-center text-[10px] md:text-xs font-bold uppercase tracking-[0.35em] text-black/25">
-          As Featured In
+          Brands We Carry
         </p>
       </div>
       
